@@ -13,7 +13,7 @@ const (
 
 //InitPanicFile 初始化 crash 文件
 func InitPanicFile(panicFile string) error {
-	file, err := os.OpenFile(panicFile, os.O_CREATE|os.O_APPEND, 0666)
+	file, err := os.OpenFile(panicFile, os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		return err
 	}
@@ -25,8 +25,8 @@ func InitPanicFile(panicFile string) error {
 		fd.Close()
 		return err
 	}
-	runtime.SetFinalizer(file, func(fd *os.File) {
-		fd.Close()
-	})
+	// runtime.SetFinalizer(file, func(fd *os.File) {
+	// 	fd.Close()
+	// })
 	return nil
 }
